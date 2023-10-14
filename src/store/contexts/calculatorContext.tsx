@@ -1,4 +1,4 @@
-import { ReactNode, createContext, useReducer } from "react";
+import { ReactNode, createContext, useContext, useReducer } from "react";
 import { calculatorContextReducer as reducer } from "../reducers/calculatorReducer.ts";
 
 export enum REDUCER_ACTION_TYPE {
@@ -31,6 +31,7 @@ type Actions = {
 };
 type ContextValues = State & Actions;
 
+// actual code
 const calculatorContext = createContext<CalculatorContext | null>(null);
 
 const initialState: State = {
@@ -57,4 +58,16 @@ export const CalculatorContextProvider: CalculatorContextProviderType = ({
       {children}
     </calculatorContext.Provider>
   );
+};
+
+export const useCalculatorContext = () => {
+  const theCalculatorContext = useContext(calculatorContext);
+
+  if (!theCalculatorContext) {
+    throw new Error(
+      "useCurrentUser has to be used within <CurrentUserContext.Provider>"
+    );
+  }
+
+  return theCalculatorContext;
 };
