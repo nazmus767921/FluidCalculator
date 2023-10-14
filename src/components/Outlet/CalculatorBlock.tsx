@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import InputBlock from "./InputBlock";
 import { styled } from "styled-components";
 import AddBtn from "./AddBtn";
@@ -7,7 +7,7 @@ import { ImFontSize } from "react-icons/im";
 import { BsPhoneFill } from "react-icons/bs";
 import { PiMonitorFill } from "react-icons/pi";
 
-export type Value = number | "";
+export type Value = number | null;
 export type Measurements = {
 	"font-min": Value;
 	"font-max": Value;
@@ -33,15 +33,51 @@ const CalculatorBlock = ({
 	remove_calculator: RemoveCalculator;
 }): React.JSX.Element => {
 	const [measurements, setMeasurements] = useState(initialState);
+	const [slope, setSlope] = useState(0);
+	const [yInterceptor, setYInterceptor] = useState(0);
 
-const update_input = (e: React.ChangeEvent<HTMLInputElement>) => {
-  const { name, value } = e.currentTarget;
-  const newState = { ...measurements, [name]: Number(value) };
-  setMeasurements(newState);
-};
+	const {
+		"font-max": fontMax,
+		"font-min": fontMin,
+		"width-min": widthMin,
+		"width-max": widthMax,
+	} = measurements;
+
+	useEffect(() => {
+		if (Object.values(measurements).every((value) => value !== 0)) {
+			if (
+				fontMin !== null &&
+				fontMax !== null &&
+				widthMin !== null &&
+				widthMax !== null
+			) {
+				if (!(fontMin >= fontMax) && !(widthMin >= widthMax)) {
+					const slope: number = (fontMax - fontMin) / (widthMax - widthMin);
+					const yInterceptor = fontMin - slope * widthMin;
+					setSlope(slope);
+					setYInterceptor(yInterceptor);
+				}
+			}
+		}
+	}, [measurements]);
+
+	console.log("slope:", slope, "y:", yInterceptor);
+
+	// input actions
+	const update_input = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const { name, value } = e.currentTarget;
+		if (Number(value) !== null) {
+			const newState = { ...measurements, [name]: Number(value) };
+			setMeasurements(newState);
+		}
+	};
 
 	return (
 		<Wrapper>
+			<code>
+				font-size: clamp({fontMin / 16}rem, {(slope * 100).toFixed(5)}vw +{" "}
+				{(yInterceptor / 16).toFixed(5)}rem, {fontMax / 16}rem)
+			</code>
 			{/* Minimum */}
 			<InputBlock
 				icon={<ImFontSize />}
