@@ -4,13 +4,15 @@ import { CalculatedData } from "../../components/Outlet/CalculatorBlock.tsx";
 
 export enum REDUCER_ACTION_TYPE {
   SET_CALCULATED_VALUES = "SET_CALCULATED_VALUES",
+  REMOVE_CALCULATED_VALUES = "REMOVE_CALCULATED_VALUES",
 }
 export type REDUCER_ACTION = {
   type: REDUCER_ACTION_TYPE;
-  payload?: CalculatedData;
+  payload?: CalculatedData | string;
 };
 type Actions = {
   set_calculatedValues(payload: CalculatedData): void;
+  remove_calculatedValues(payload: string): void;
 };
 
 export type State = {
@@ -42,9 +44,19 @@ export const CalculatorContextProvider: CalculatorContextProviderType = ({
     });
   };
 
+  const remove_calculatedValues: Actions["remove_calculatedValues"] = (
+    payload
+  ) => {
+    dispatch({
+      type: REDUCER_ACTION_TYPE.REMOVE_CALCULATED_VALUES,
+      payload: payload,
+    });
+  };
+
   const contextValues: ContextValues = {
     ...state,
     set_calculatedValues,
+    remove_calculatedValues,
   };
 
   return (

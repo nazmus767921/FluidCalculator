@@ -44,8 +44,6 @@ const CalculatorBlock = ({
   remove_calculator: RemoveCalculator;
 }): React.JSX.Element => {
   const [measurements, setMeasurements] = useState(initialState);
-  // const [slope, setSlope] = useState(0);
-  // const [yInterceptor, setYInterceptor] = useState(0);
   const { set_calculatedValues } = useCalculatorContext();
 
   const {
@@ -60,8 +58,6 @@ const CalculatorBlock = ({
       if (!(fontMin >= fontMax) && !(widthMin >= widthMax)) {
         const slope: number = (fontMax - fontMin) / (widthMax - widthMin);
         const yInterceptor = fontMin - slope * widthMin;
-        // setSlope(slope);
-        // setYInterceptor(yInterceptor);
         set_calculatedValues({
           id,
           slope,
