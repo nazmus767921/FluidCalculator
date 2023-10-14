@@ -29,7 +29,7 @@ const InputBlock = ({
 				type={"number"}
 				min={0}
 				max={9999}
-				value={measurements[name] !== 0 ? measurements[name] : ""}
+				value={measurements[name] !== 0 ? measurements[name] : null}
 				onChange={update_input}
 				width="7.8em"
 			/>
