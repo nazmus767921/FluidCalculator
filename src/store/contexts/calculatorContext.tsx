@@ -1,33 +1,25 @@
 import { ReactNode, createContext, useContext, useReducer } from "react";
 import { calculatorContextReducer as reducer } from "../reducers/calculatorReducer.ts";
+import { CalculatedData } from "../../components/Outlet/CalculatorBlock.tsx";
 
 export enum REDUCER_ACTION_TYPE {
   SET_CALCULATED_VALUES = "SET_CALCULATED_VALUES",
 }
-
 export type REDUCER_ACTION = {
   type: REDUCER_ACTION_TYPE;
-  payload?: CalculatedValuesType;
+  payload?: CalculatedData;
+};
+type Actions = {
+  set_calculatedValues(payload: CalculatedData): void;
 };
 
-type CalculatedValuesType = {
-  id: number | string;
-  widthMin: number;
-  widthMax: number;
-  fontMin: number;
-  fontMax: number;
-}[];
-
 export type State = {
-  calculatedValues: CalculatedValuesType | [];
+  calculatedValues: CalculatedData[] | [];
 };
 type Props = {
   children: ReactNode;
 };
 type CalculatorContextProviderType = ({ ...arg }: Props) => ReactNode;
-type Actions = {
-  set_calculatedValues(): void;
-};
 type ContextValues = State & Actions;
 
 // actual code
@@ -43,8 +35,11 @@ export const CalculatorContextProvider: CalculatorContextProviderType = ({
   const [state, dispatch] = useReducer(reducer, initialState);
 
   // actions
-  const set_calculatedValues = (): void => {
-    dispatch({ type: REDUCER_ACTION_TYPE.SET_CALCULATED_VALUES });
+  const set_calculatedValues: Actions["set_calculatedValues"] = (payload) => {
+    dispatch({
+      type: REDUCER_ACTION_TYPE.SET_CALCULATED_VALUES,
+      payload: payload,
+    });
   };
 
   const contextValues: ContextValues = {

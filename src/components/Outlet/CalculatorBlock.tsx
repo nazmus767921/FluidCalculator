@@ -22,6 +22,16 @@ const initialState: Measurements = {
   "width-max": 1920,
 };
 
+export interface CalculatedData {
+  id: string;
+  slope: number;
+  yInterceptor: number;
+  fontMax: number;
+  fontMin: number;
+  widthMin: number;
+  widthMax: number;
+}
+
 const CalculatorBlock = ({
   id,
   isLastOfIndex = true,
@@ -34,11 +44,9 @@ const CalculatorBlock = ({
   remove_calculator: RemoveCalculator;
 }): React.JSX.Element => {
   const [measurements, setMeasurements] = useState(initialState);
-  const [slope, setSlope] = useState(0);
-  const [yInterceptor, setYInterceptor] = useState(0);
+  // const [slope, setSlope] = useState(0);
+  // const [yInterceptor, setYInterceptor] = useState(0);
   const { set_calculatedValues } = useCalculatorContext();
-
-  // const set_calculatedValues = calculatorContext?.set_calculatedValues;
 
   const {
     "font-max": fontMax,
@@ -52,8 +60,17 @@ const CalculatorBlock = ({
       if (!(fontMin >= fontMax) && !(widthMin >= widthMax)) {
         const slope: number = (fontMax - fontMin) / (widthMax - widthMin);
         const yInterceptor = fontMin - slope * widthMin;
-        setSlope(slope);
-        setYInterceptor(yInterceptor);
+        // setSlope(slope);
+        // setYInterceptor(yInterceptor);
+        set_calculatedValues({
+          id,
+          slope,
+          yInterceptor,
+          fontMax,
+          fontMin,
+          widthMin,
+          widthMax,
+        });
       }
     }
   }, [measurements]);
