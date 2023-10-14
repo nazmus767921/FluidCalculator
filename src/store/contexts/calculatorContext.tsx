@@ -2,7 +2,7 @@ import { ReactNode, createContext, useContext, useReducer } from "react";
 import { calculatorContextReducer as reducer } from "../reducers/calculatorReducer.ts";
 
 export enum REDUCER_ACTION_TYPE {
-  SET_CALCULATED_VALUES,
+  SET_CALCULATED_VALUES = "SET_CALCULATED_VALUES",
 }
 
 export type REDUCER_ACTION = {
@@ -21,7 +21,6 @@ type CalculatedValuesType = {
 export type State = {
   calculatedValues: CalculatedValuesType | [];
 };
-type CalculatorContext = State;
 type Props = {
   children: ReactNode;
 };
@@ -32,7 +31,7 @@ type Actions = {
 type ContextValues = State & Actions;
 
 // actual code
-const calculatorContext = createContext<CalculatorContext | null>(null);
+const calculatorContext = createContext<ContextValues | null>(null);
 
 const initialState: State = {
   calculatedValues: [],
