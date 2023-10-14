@@ -6,6 +6,7 @@ import { IDofCalculator, RemoveCalculator } from "./Outlet";
 import { ImFontSize } from "react-icons/im";
 import { BsPhoneFill } from "react-icons/bs";
 import { PiMonitorFill } from "react-icons/pi";
+import { getRem } from "../../helpers/getRem";
 
 export type Value = number | null;
 export type Measurements = {
@@ -41,22 +42,15 @@ const CalculatorBlock = ({
 		"font-min": fontMin,
 		"width-min": widthMin,
 		"width-max": widthMax,
-	} = measurements;
+	} = measurements as { [keys: string]: number };
 
 	useEffect(() => {
 		if (Object.values(measurements).every((value) => value !== 0)) {
-			if (
-				fontMin !== null &&
-				fontMax !== null &&
-				widthMin !== null &&
-				widthMax !== null
-			) {
-				if (!(fontMin >= fontMax) && !(widthMin >= widthMax)) {
-					const slope: number = (fontMax - fontMin) / (widthMax - widthMin);
-					const yInterceptor = fontMin - slope * widthMin;
-					setSlope(slope);
-					setYInterceptor(yInterceptor);
-				}
+			if (!(fontMin >= fontMax) && !(widthMin >= widthMax)) {
+				const slope: number = (fontMax - fontMin) / (widthMax - widthMin);
+				const yInterceptor = fontMin - slope * widthMin;
+				setSlope(slope);
+				setYInterceptor(yInterceptor);
 			}
 		}
 	}, [measurements]);
@@ -75,8 +69,10 @@ const CalculatorBlock = ({
 	return (
 		<Wrapper>
 			<code>
-				font-size: clamp({fontMin / 16}rem, {(slope * 100).toFixed(5)}vw +{" "}
-				{(yInterceptor / 16).toFixed(5)}rem, {fontMax / 16}rem)
+				@media only screen and (min-width: {widthMin}px, max-width: {widthMax}
+				px) {"{"} font-size: clamp({getRem(fontMin)}, {(slope * 100).toFixed(5)}
+				vw + {(yInterceptor / 16).toFixed(5)}rem, {fontMax / 16}rem)
+				{"};"}
 			</code>
 			{/* Minimum */}
 			<InputBlock
