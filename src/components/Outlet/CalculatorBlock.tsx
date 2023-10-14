@@ -34,13 +34,11 @@ const CalculatorBlock = ({
 }): React.JSX.Element => {
 	const [measurements, setMeasurements] = useState(initialState);
 
-	const update_input = (e: React.ChangeEvent<HTMLInputElement>) => {
-		const name: string = e.currentTarget.name;
-		const value: number = Number(e.currentTarget.value);
-
-		const newState: Measurements = { ...measurements, [name]: value };
-		setMeasurements(newState);
-	};
+const update_input = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const { name, value } = e.currentTarget;
+  const newState = { ...measurements, [name]: Number(value) };
+  setMeasurements(newState);
+};
 
 	return (
 		<Wrapper>
