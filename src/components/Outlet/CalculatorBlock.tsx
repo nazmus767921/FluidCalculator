@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { memo, useCallback, useEffect, useMemo, useState } from "react";
 import InputBlock from "./InputBlock";
 import { styled } from "styled-components";
 import AddBtn from "./AddBtn";
@@ -32,101 +32,118 @@ export interface CalculatedData {
   widthMax: number;
 }
 
-const CalculatorBlock = ({
-  id,
-  isLastOfIndex = true,
-  add_a_calculator,
-  remove_calculator,
-}: {
-  id: IDofCalculator;
-  isLastOfIndex: boolean;
-  add_a_calculator(): void;
-  remove_calculator: RemoveCalculator;
-}): React.JSX.Element => {
-  const [measurements, setMeasurements] = useState(initialState);
-  const { set_calculatedValues } = useCalculatorContext();
+const CalculatorBlock = memo(
+  ({
+    id,
+    isLastOfIndex = true,
+    add_a_calculator,
+    remove_calculator,
+  }: {
+    id: IDofCalculator;
+    isLastOfIndex: boolean;
+    add_a_calculator(): void;
+    remove_calculator: RemoveCalculator;
+  }): React.JSX.Element => {
+    const [measurements, setMeasurements] = useState(initialState);
+    const { set_calculatedValues } = useCalculatorContext();
 
-  const {
-    "font-max": fontMax,
-    "font-min": fontMin,
-    "width-min": widthMin,
-    "width-max": widthMax,
-  } = measurements as { [keys: string]: number };
+    const {
+      "font-max": fontMax,
+      "font-min": fontMin,
+      "width-min": widthMin,
+      "width-max": widthMax,
+    } = measurements as { [keys: string]: number };
 
-  useEffect(() => {
-    if (Object.values(measurements).every((value) => value !== 0)) {
-      if (!(fontMin >= fontMax) && !(widthMin >= widthMax)) {
-        const slope: number = (fontMax - fontMin) / (widthMax - widthMin);
-        const yInterceptor = fontMin - slope * widthMin;
-        set_calculatedValues({
-          id,
-          slope,
-          yInterceptor,
-          fontMax,
-          fontMin,
-          widthMin,
-          widthMax,
-        });
+    const setValuesToGlobalContext = useCallback(() => {
+      if (Object.values(measurements).every((value) => value !== 0)) {
+        if (!(fontMin >= fontMax) && !(widthMin >= widthMax)) {
+          const slope: number = (fontMax - fontMin) / (widthMax - widthMin);
+          const yInterceptor = fontMin - slope * widthMin;
+          set_calculatedValues({
+            id,
+            slope,
+            yInterceptor,
+            fontMax,
+            fontMin,
+            widthMin,
+            widthMax,
+          });
+        }
       }
-    }
-  }, [measurements]);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [measurements]);
 
-  // input actions
-  const update_input = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.currentTarget;
-    if (Number(value) !== null) {
-      const newState = { ...measurements, [name]: Number(value) };
-      setMeasurements(newState);
-    }
-  };
+    useEffect(() => {
+      setValuesToGlobalContext();
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [measurements]);
 
-  return (
-    <Wrapper>
-      {/* Minimum */}
-      <InputBlock
-        icon={<ImFontSize />}
-        measurements={measurements}
-        update_input={update_input}
-        name="font-min"
-        label="Min Font-size"
-      />
-      <InputBlock
-        icon={<BsPhoneFill />}
-        measurements={measurements}
-        update_input={update_input}
-        name="width-min"
-        label="Min Width"
-      />
-      {/* Minimum */}
-      <Divider />
-      {/* Maximum */}
-      <InputBlock
-        icon={<ImFontSize />}
-        measurements={measurements}
-        update_input={update_input}
-        name="font-max"
-        label="Max Font-size"
-      />
-      <InputBlock
-        icon={<PiMonitorFill />}
-        measurements={measurements}
-        update_input={update_input}
-        name="width-max"
-        label="Max Width"
-      />
-      {/* Maximum */}
-      <AddBtn
-        id={id}
-        add_a_calculator={add_a_calculator}
-        remove_calculator={remove_calculator}
-        isLastOfIndex={isLastOfIndex}
-      />
-    </Wrapper>
-  );
-};
+    // input actions
+    const update_input = (e: React.ChangeEvent<HTMLInputElement>) => {
+      const { name, value } = e.currentTarget;
+      if (Number(value) !== null) {
+        const newState = { ...measurements, [name]: Number(value) };
+        setMeasurements(newState);
+      }
+    };
 
-const Divider = styled.div`
-  margin-inline: 3em;
+    return (
+      <Wrapper>
+        {/* Minimum */}
+        <SimilarBlockContainer>
+          <InputBlock
+            icon={<ImFontSize />}
+            measurements={measurements}
+            update_input={update_input}
+            name="font-min"
+            label="Min Font-size"
+          />
+          <InputBlock
+            icon={<BsPhoneFill />}
+            measurements={measurements}
+            update_input={update_input}
+            name="width-min"
+            label="Min Width"
+          />
+        </SimilarBlockContainer>
+        {/* Minimum */}
+        {/* Maximum */}
+        <SimilarBlockContainer>
+          <InputBlock
+            icon={<ImFontSize />}
+            measurements={measurements}
+            update_input={update_input}
+            name="font-max"
+            label="Max Font-size"
+          />
+          <InputBlock
+            icon={<PiMonitorFill />}
+            measurements={measurements}
+            update_input={update_input}
+            name="width-max"
+            label="Max Width"
+          />
+        </SimilarBlockContainer>
+        {/* Maximum */}
+        <AddBtn
+          id={id}
+          add_a_calculator={add_a_calculator}
+          remove_calculator={remove_calculator}
+          isLastOfIndex={isLastOfIndex}
+        />
+      </Wrapper>
+    );
+  }
+);
+
+const SimilarBlockContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 1em;
+  @media screen and (min-width: 1280px) {
+    gap: 1.5em;
+  }
 `;
 
 const Wrapper = styled.div`
@@ -136,9 +153,18 @@ const Wrapper = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  gap: 1.88em;
+  gap: 2em;
+  @media screen and (min-width: 1280px) {
+    flex-direction: column;
+  }
+  @media screen and (min-width: 1840px) {
+    flex-direction: row;
+  }
 
   padding: 4.06em;
+  @media screen and (min-width: 1840px) {
+    padding-inline: 2em;
+  }
 
   /* design */
   border-block: 1px dotted;

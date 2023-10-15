@@ -5,36 +5,38 @@ import { border } from "../styles";
 import SocialsContainer from "./SocialsContainer";
 
 const SideBar = (): React.JSX.Element => {
-	return (
-		<Wrapper>
-			<Logo className="logo-wrapper" />
-			<SocialsContainer />
-		</Wrapper>
-	);
+  return (
+    <Wrapper>
+      <Logo className="logo-wrapper" />
+      <SocialsContainer />
+    </Wrapper>
+  );
 };
 
 const Wrapper = styled.div`
-	width: 7em;
+  grid-area: sidebar;
 
-	position: fixed;
-	top: 0;
-	bottom: 0;
+  width: 7em;
 
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-	align-items: center;
+  position: fixed;
+  top: 0;
+  bottom: 0;
 
-	padding-bottom: 3em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
 
-	border-right: ${border["--border-md-solid"]} ${(props) => props.theme.border};
+  padding-bottom: 3em;
 
-	.logo-wrapper {
-		border-bottom: (
-			${border["--border-sm-solid"]} ${(props) => props.theme.border}
-		);
-		padding: 1em;
-	}
+  border-right: ${border["--border-md-solid"]} ${(props) => props.theme.border};
+
+  .logo-wrapper {
+    border-bottom: (
+      ${border["--border-sm-solid"]} ${(props) => props.theme.border}
+    );
+    padding: 1em;
+  }
 `;
 
 export default SideBar;

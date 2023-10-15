@@ -1,7 +1,4 @@
-const codeHighlighterStyle: CSSProperties = {
-  padding: "2em",
-  borderRadius: "0.5em",
-};
+
 
 <SyntaxHighlighter
 language="css"

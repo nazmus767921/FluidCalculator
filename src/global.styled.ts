@@ -1,6 +1,13 @@
 import { createGlobalStyle } from "styled-components";
 
 export const GlobalStyleProvider = createGlobalStyle`
+
+
+html {
+  font-size: 1rem;
+  /* font-size: clamp(1rem, 0.25641vw + 0.94231rem, 1.25rem); */
+  font-size: clamp(0.8rem, 0.51282vw + 0.63462rem, 1.25rem);
+}
 :root {
   font-family: 'JetBrains Mono', monospace;
   line-height: 1.5;
@@ -22,10 +29,10 @@ export const GlobalStyleProvider = createGlobalStyle`
 }
 
 body {
-  font-size: 1rem;
-  font-size: clamp(1rem, 0.9423076923076923rem + 0.2564102564102564vw, 1.25rem);
   min-width: 320px;
   min-height: 100vh;
+  max-width: 100vw;
+  overflow-x: hidden;
 }
 
 a,button {

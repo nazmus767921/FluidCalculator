@@ -52,10 +52,15 @@ const Outlet = (): ReactNode => {
 };
 
 const Section = styled.div`
-  width: fit-content;
-  min-width: 50em;
+  grid-area: outlet;
+
+  width: 100%;
+  /* min-width: fit-content; */
   height: 100%;
-  min-height: 100vh;
+  @media screen and (min-width: 1280px) {
+    min-height: 100vh;
+  }
+  
 
   display: flex;
   flex-direction: column;
