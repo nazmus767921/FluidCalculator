@@ -32,9 +32,7 @@ const Wrapper = styled.div`
   border-right: ${border["--border-md-solid"]} ${(props) => props.theme.border};
 
   .logo-wrapper {
-    border-bottom: (
-      ${border["--border-sm-solid"]} ${(props) => props.theme.border}
-    );
+    border-bottom: ${border["--border-md-solid"]} ${(props) => props.theme.border}; 
     padding: 1em;
   }
 `;

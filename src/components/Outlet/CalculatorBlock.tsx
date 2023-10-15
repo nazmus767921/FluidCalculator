@@ -1,10 +1,21 @@
-import { memo, useCallback, useEffect, useMemo, useState } from "react";
+import {
+  ReactNode,
+  memo,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import InputBlock from "./InputBlock";
 import { styled } from "styled-components";
 import AddBtn from "./AddBtn";
 import { IDofCalculator, RemoveCalculator } from "./Outlet";
 import { ImFontSize } from "react-icons/im";
-import { BsPhoneFill } from "react-icons/bs";
+import {
+  BsPhoneFill,
+  BsFillPhoneLandscapeFill,  
+} from "react-icons/bs";
+import { IoTabletPortrait,IoTabletLandscape } from "react-icons/io5";
 import { PiMonitorFill } from "react-icons/pi";
 import { useCalculatorContext } from "../../store/contexts/calculatorContext";
 
@@ -87,6 +98,23 @@ const CalculatorBlock = memo(
       }
     };
 
+    // get icons based on input value
+    const getDeviceIcon = (value: number): ReactNode => {
+      if (value >= 320 && value < 512) {
+        return <BsPhoneFill />;
+      }
+      if (value >= 512 && value < 768) {
+        return <BsFillPhoneLandscapeFill />;
+      }
+      if (value >= 768 && value < 991) {
+        return <IoTabletPortrait />;
+      }
+      if (value >= 991 && value < 1024) {
+        return <IoTabletLandscape />;
+      }
+      return <PiMonitorFill />;
+    };
+
     return (
       <Wrapper>
         {/* Minimum */}
@@ -99,7 +127,7 @@ const CalculatorBlock = memo(
             label="Min Font-size"
           />
           <InputBlock
-            icon={<BsPhoneFill />}
+            icon={getDeviceIcon(measurements["width-min"]!)}
             measurements={measurements}
             update_input={update_input}
             name="width-min"
@@ -117,7 +145,7 @@ const CalculatorBlock = memo(
             label="Max Font-size"
           />
           <InputBlock
-            icon={<PiMonitorFill />}
+            icon={getDeviceIcon(measurements["width-max"]!)}
             measurements={measurements}
             update_input={update_input}
             name="width-max"
