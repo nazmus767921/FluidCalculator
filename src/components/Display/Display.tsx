@@ -32,9 +32,9 @@ const Display = (): React.JSX.Element => {
                 {`@media screen and (min-width: ${widthMin}px) and (max-width: ${widthMax}px) {
     html {
       font-size: 1rem; /* browser support fallback */
-      font-size: clamp(${getRem(fontMin)}, ${(slope * 100).toFixed(5)}vw + ${(
-                  yInterceptor / 16
-                ).toFixed(5)}rem, ${fontMax / 16}rem);
+      font-size: clamp(${getRem(fontMin)}, ${parseFloat((yInterceptor / 16).toFixed(
+                  5
+                ))}rem + ${parseFloat((slope * 100).toFixed(5))}vw, ${fontMax / 16}rem);
     }
   };`}
               </SyntaxHighlighter>
@@ -64,7 +64,7 @@ const Section = styled.div`
     padding-block: 1em;
   }
   @media screen and (min-width: 1280px) {
-  padding-top: 12em;
+    padding-top: 12em;
 
     .syntax {
       font-size: 0.8em;

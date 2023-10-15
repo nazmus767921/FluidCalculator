@@ -34,7 +34,7 @@ To apply the fluid font sizes to your website, follow these steps:
 
 ## Managing Calculator Instances
 
-You can add multiple calculator instances to calculate without leaving the site or reloading it. Each instance can have its own set of font sizes and breakpoints. Here's how to manage calculator instances:
+You can add multiple (upto 5, you won't need more than that i guess) calculator instances to calculate without leaving the site or reloading it. Each instance can have its own set of font sizes and breakpoints. Here's how to manage calculator instances:
 
 - To add a new calculator instance, click the "+" button beside each calculator instance.
 - To remove a calculator instance, click the "-" button beside the specific calculator instance you want to remove.
@@ -54,7 +54,7 @@ Let's go through an example to demonstrate how to use this website:
 @media only screen and (min-width: 768px and max-width: 1024px) {
   body {
     font-size: 1rem; /* browser support fallback */
-    font-size: clamp(0.8rem, 4.6875vw + -1.5rem, 1.5rem);
+    font-size: clamp(0.8rem, -1.5rem + 4.6875vw, 1.5rem);
   }
 }
 ```
