@@ -68,9 +68,17 @@ input[type=number] {
 ::selection {
   background-color: ${(props) => props.theme.input};
 }
-
 ::-moz-selection {
   background-color: ${(props) => props.theme.input};
+}
+
+::-webkit-scrollbar {
+    width: 8px; 
+    background-color: black;
+}
+::-webkit-scrollbar-thumb {
+    background: ${(props) => props.theme.text};
+    border-radius: 99px;
 }
 
 img {
