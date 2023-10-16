@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Header from "./Header";
 import CalculatorBlock from "./CalculatorBlock";
 import { useCalculatorContext } from "../../store/contexts/calculatorContext";
+import { toast } from "react-toastify";
 
 export type IDofCalculator = string;
 
@@ -23,6 +24,17 @@ const Outlet = (): ReactNode => {
         ...calculatorBlockHolder,
         { id: crypto.randomUUID() },
       ]);
+    } else {
+      toast.warn("You can't add more than 5 calculator blocks", {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     }
   };
   const remove_calculator: RemoveCalculator = (id) => {
@@ -60,7 +72,6 @@ const Section = styled.div`
   @media screen and (min-width: 1280px) {
     min-height: 100vh;
   }
-  
 
   display: flex;
   flex-direction: column;

@@ -91,4 +91,9 @@ img {
   width: 100%;
   height: 100%;
 }
+
+.toast {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .75em;
+}
 `;

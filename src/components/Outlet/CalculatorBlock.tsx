@@ -8,6 +8,7 @@ import { useCalculatorContext } from "../../store/contexts/calculatorContext";
 import AddBtn from "./AddBtn";
 import InputBlock from "./InputBlock";
 import { IDofCalculator, RemoveCalculator } from "./Outlet";
+import { toast } from "react-toastify";
 
 export type Value = number | null;
 export type Measurements = {
@@ -32,6 +33,19 @@ export interface CalculatedData {
   widthMin: number;
   widthMax: number;
 }
+
+const warnToast = (content: string): void => {
+  toast.warn(content, {
+    position: "top-right",
+    autoClose: 2000,
+    hideProgressBar: true,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "light",
+  });
+};
 
 const CalculatorBlock = memo(
   ({
@@ -75,6 +89,12 @@ const CalculatorBlock = memo(
     }, [measurements]);
 
     useEffect(() => {
+      if (fontMin >= fontMax) {
+        warnToast("Font Max must be greater than Font Min");
+      }
+      if (widthMin >= widthMax) {
+        warnToast("Width Max must be greater than Width Min");
+      }
       setValuesToGlobalContext();
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [measurements]);
@@ -181,7 +201,7 @@ const Wrapper = styled.div`
   gap: 2em;
 
   padding: 4.06em;
-  
+
   @media screen and (min-width: 1840px) {
     padding-inline: 2em;
     flex-direction: row;
