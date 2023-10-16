@@ -34,7 +34,6 @@ const Btn = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  transform: translateY(1em);
   color: ${(props) => props.theme.icon};
 
   transition: color 0.35s ${ease["out-expo"]};

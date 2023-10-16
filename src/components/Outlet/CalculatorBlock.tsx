@@ -1,13 +1,13 @@
 import { ReactNode, memo, useCallback, useEffect, useState } from "react";
-import InputBlock from "./InputBlock";
-import { styled } from "styled-components";
-import AddBtn from "./AddBtn";
-import { IDofCalculator, RemoveCalculator } from "./Outlet";
+import { BsFillPhoneLandscapeFill, BsPhoneFill } from "react-icons/bs";
 import { ImFontSize } from "react-icons/im";
-import { BsPhoneFill, BsFillPhoneLandscapeFill } from "react-icons/bs";
-import { IoTabletPortrait, IoTabletLandscape } from "react-icons/io5";
+import { IoTabletLandscape, IoTabletPortrait } from "react-icons/io5";
 import { PiMonitorFill } from "react-icons/pi";
+import { styled } from "styled-components";
 import { useCalculatorContext } from "../../store/contexts/calculatorContext";
+import AddBtn from "./AddBtn";
+import InputBlock from "./InputBlock";
+import { IDofCalculator, RemoveCalculator } from "./Outlet";
 
 export type Value = number | null;
 export type Measurements = {
@@ -158,30 +158,33 @@ const CalculatorBlock = memo(
 );
 
 const SimilarBlockContainer = styled.div`
+  width: min(100%, 25em);
+
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-between;
   gap: 1em;
+
+  @media screen and (min-width: 1280px) {
+    flex-direction: row;
+    width: max-content;
+  }
 `;
 
 const Wrapper = styled.div`
   width: 100%;
 
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
   justify-content: space-between;
   gap: 2em;
-  @media screen and (min-width: 1280px) {
-    flex-direction: column;
-  }
-  @media screen and (min-width: 1840px) {
-    flex-direction: row;
-  }
 
   padding: 4.06em;
+  
   @media screen and (min-width: 1840px) {
     padding-inline: 2em;
+    flex-direction: row;
   }
 
   /* design */

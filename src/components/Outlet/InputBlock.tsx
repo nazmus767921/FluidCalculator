@@ -1,8 +1,8 @@
+import { ReactNode, memo } from "react";
 import styled from "styled-components";
+import { Measurements } from "./CalculatorBlock";
 import Input from "./Input";
 import Label from "./Label";
-import { Measurements } from "./CalculatorBlock";
-import { ReactNode, memo } from "react";
 
 type Props = {
   icon?: ReactNode;
@@ -34,11 +34,14 @@ const InputBlock = memo(
 );
 
 const Block = styled.div`
-  width: max-content;
-
+  width: 100%;
+  
   display: flex;
   flex-direction: column;
   gap: 0.75em;
+  @media screen and (min-width: 1280px) {
+    width: max-content;
+  }
 `;
 
 export default InputBlock;

@@ -17,13 +17,14 @@ const Label = ({ children, htmlFor, icon }: Props) => {
 };
 
 const StyledLabel = styled.label`
+width: fit-content;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   gap: 0.625em;
 
-  font-size: 0.8em;
+  font-size: 1.25em;
   font-weight: 500;
 
   color: ${(props) => props.theme.text};
@@ -33,6 +34,9 @@ const StyledLabel = styled.label`
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+  @media screen and (min-width: 1280px) {
+    font-size: .85em;
   }
 `;
 
