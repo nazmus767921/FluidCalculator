@@ -1,7 +1,6 @@
 import { Layout } from "./App.layout";
 import SideBar from "./components/SideBar";
-import Outlet from "./components/Outlet/Outlet";
-import Display from "./components/Display/Display";
+import { Outlet } from "react-router-dom";
 
 const App = () => {
   return (
@@ -11,8 +10,9 @@ const App = () => {
         style={{ width: "5em", gridArea: "sidebar" }}
       ></div>
       <SideBar />
-      <Outlet />
-      <Display />
+      <div className="outlet-container">
+        <Outlet />
+      </div>
     </Layout>
   );
 };

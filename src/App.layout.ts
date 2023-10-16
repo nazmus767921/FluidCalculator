@@ -6,15 +6,19 @@ export const Layout = styled.main`
   display: grid;
   grid-template-areas:
     "sidebar outlet"
-    "sidebar display";
+    "sidebar outlet";
   grid-template-columns: auto 1fr;
 
   @media only screen and (min-width: 1280px) {
-    grid-template-areas: "sidebar outlet display";
-    grid-template-columns: auto minmax(fit-content(0), 40em) 1fr;
+    grid-template-areas: "sidebar outlet";
+    grid-template-columns: auto 1fr;
   }
   @media only screen and (min-width: 1840px) {
-    grid-template-areas: "sidebar outlet display";
-    grid-template-columns: auto auto 1fr;
+    grid-template-areas: "sidebar outlet";
+    grid-template-columns: auto 1fr;
+  }
+
+  .outlet-container {
+    grid-area: outlet;
   }
 `;

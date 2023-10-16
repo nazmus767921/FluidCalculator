@@ -52,7 +52,7 @@ const Outlet = (): ReactNode => {
 };
 
 const Section = styled.div`
-  grid-area: outlet;
+  grid-area: calculator;
 
   width: 100%;
   /* min-width: fit-content; */

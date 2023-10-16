@@ -31,9 +31,13 @@ const Body = styled.div`
   justify-content: center;
   align-items: center;
 
-  background-color: rgba(0, 0, 0, 1);
-  color: #c8c8c8;
   border-radius: 5px;
+  background-color: #ffffff;
+  color: #000000;
+  @media screen and (min-width: 1280px) {
+    background-color: #000000;
+    color: #c8c8c8;
+  }
 
   font-size: 0.75em;
   font-weight: 900;
@@ -44,8 +48,11 @@ const Body = styled.div`
     width: 1em;
     height: 1em;
 
-    background-color: #000000;
+    background-color: #ffffff;
     border-radius: 2px;
+    @media screen and (min-width: 1280px) {
+      background-color: #000000;
+    }
 
     position: absolute;
     left: -0.25em;
