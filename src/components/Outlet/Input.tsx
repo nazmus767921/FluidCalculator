@@ -26,14 +26,14 @@ const Input = ({
 }: Props) => {
   return (
     <Container style={{ minWidth: width, minHeight: height }}>
-      <div className="px">PX</div>
+      <div className="px">px</div>
       <InputElement
         name={name}
         type={type}
         id={id || name}
         min={min}
         max={max}
-        value={value}
+        value={value!}
         onChange={onChange}
         onInput={(e) => {
           const inputValue = Number(e.currentTarget.value);
@@ -48,6 +48,7 @@ const Input = ({
 
 const InputElement = styled.input`
   width: 100%;
+
   display: flex;
   padding: var(--padding);
   justify-content: flex-end;
@@ -60,6 +61,10 @@ const InputElement = styled.input`
 
   font-size: 1em;
   font-weight: 500;
+
+  &:focus {
+    outline: ${(props) => props.theme.input} solid 2px;
+  }
 `;
 
 const Container = styled.div`
@@ -70,14 +75,14 @@ const Container = styled.div`
 
   .px {
     text-transform: uppercase;
-    color: ${(props) => props.theme.input};
-    font-weight: 500;
-
-    padding-right: var(--padding);
 
     display: flex;
     align-items: center;
     justify-content: center;
+
+    color: ${(props) => props.theme.input};
+
+    padding-right: var(--padding);
 
     position: absolute;
     right: 0;

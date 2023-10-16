@@ -1,21 +1,11 @@
-import {
-  ReactNode,
-  memo,
-  useCallback,
-  useEffect,
-  useMemo,
-  useState,
-} from "react";
+import { ReactNode, memo, useCallback, useEffect, useState } from "react";
 import InputBlock from "./InputBlock";
 import { styled } from "styled-components";
 import AddBtn from "./AddBtn";
 import { IDofCalculator, RemoveCalculator } from "./Outlet";
 import { ImFontSize } from "react-icons/im";
-import {
-  BsPhoneFill,
-  BsFillPhoneLandscapeFill,  
-} from "react-icons/bs";
-import { IoTabletPortrait,IoTabletLandscape } from "react-icons/io5";
+import { BsPhoneFill, BsFillPhoneLandscapeFill } from "react-icons/bs";
+import { IoTabletPortrait, IoTabletLandscape } from "react-icons/io5";
 import { PiMonitorFill } from "react-icons/pi";
 import { useCalculatorContext } from "../../store/contexts/calculatorContext";
 
@@ -127,22 +117,22 @@ const CalculatorBlock = memo(
             label="Min Font-size"
           />
           <InputBlock
-            icon={getDeviceIcon(measurements["width-min"]!)}
+            icon={<ImFontSize />}
             measurements={measurements}
             update_input={update_input}
-            name="width-min"
-            label="Min Width"
+            name="font-max"
+            label="Max Font-size"
           />
         </SimilarBlockContainer>
         {/* Minimum */}
         {/* Maximum */}
         <SimilarBlockContainer>
           <InputBlock
-            icon={<ImFontSize />}
+            icon={getDeviceIcon(measurements["width-min"]!)}
             measurements={measurements}
             update_input={update_input}
-            name="font-max"
-            label="Max Font-size"
+            name="width-min"
+            label="Min Width"
           />
           <InputBlock
             icon={getDeviceIcon(measurements["width-max"]!)}
@@ -195,7 +185,7 @@ const Wrapper = styled.div`
   }
 
   /* design */
-  border-block: 1px dotted;
+  border-block: 1px solid rgba(27, 22, 66, 0.1);
 `;
 
 export default CalculatorBlock;
