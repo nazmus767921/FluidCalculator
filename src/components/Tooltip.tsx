@@ -38,6 +38,7 @@ const Body = styled.div`
   font-size: 0.75em;
   font-weight: 900;
   text-align: center;
+  text-transform: capitalize;
 
   .arrow {
     width: 1em;
@@ -47,7 +48,7 @@ const Body = styled.div`
     border-radius: 2px;
 
     position: absolute;
-    right: 87%;
+    left: -0.25em;
     top: 50%;
     z-index: -1;
     transform: translateY(-50%) rotate(45deg);
