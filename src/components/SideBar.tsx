@@ -16,7 +16,7 @@ const SideBar = (): React.JSX.Element => {
 const Wrapper = styled.div`
   grid-area: sidebar;
 
-  width: 7em;
+  width: 5em;
 
   position: fixed;
   top: 0;

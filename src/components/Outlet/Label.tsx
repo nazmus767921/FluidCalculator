@@ -23,10 +23,9 @@ const StyledLabel = styled.label`
   align-items: center;
   gap: 0.625em;
 
-  font-size: 0.9375em;
+  font-size: 0.8em;
   font-weight: 500;
 
-  opacity: 0.7;
   color: ${(props) => props.theme.text};
 
   .icon {

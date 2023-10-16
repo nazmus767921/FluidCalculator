@@ -8,7 +8,7 @@ const App = () => {
     <Layout>
       <div
         className="sidebar_placeholder"
-        style={{ width: "7em", gridArea: "sidebar" }}
+        style={{ width: "5em", gridArea: "sidebar" }}
       ></div>
       <SideBar />
       <Outlet />

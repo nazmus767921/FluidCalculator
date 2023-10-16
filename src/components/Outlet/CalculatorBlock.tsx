@@ -159,9 +159,6 @@ const SimilarBlockContainer = styled.div`
   flex-direction: row;
   justify-content: space-between;
   gap: 1em;
-  @media screen and (min-width: 1280px) {
-    gap: 1.5em;
-  }
 `;
 
 const Wrapper = styled.div`
