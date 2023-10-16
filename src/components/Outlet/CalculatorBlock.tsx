@@ -90,6 +90,9 @@ const CalculatorBlock = memo(
 
     // get icons based on input value
     const getDeviceIcon = (value: number): ReactNode => {
+      if (value >= 0 && value < 320) {
+        return "?";
+      }
       if (value >= 320 && value < 512) {
         return <BsPhoneFill />;
       }
