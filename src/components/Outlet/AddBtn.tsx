@@ -13,7 +13,7 @@ const AddBtn = ({
   remove_calculator,
 }: {
   id: IDofCalculator;
-  showTooltip: (id: TooltipID, condition: boolean) => () => void | undefined;
+  showTooltip: (id: TooltipID, condition: boolean) => (() => void) | undefined;
   lengthOfHolder: number;
   isLastOfIndex: boolean;
   add_a_calculator(): void;
