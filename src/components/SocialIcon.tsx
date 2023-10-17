@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { ease } from "../utils/animations";
-import Tooltip from "./Tooltip";
+import Tooltip from "./TooltipLeft";
 
 type Props = {
   children: React.ReactNode;

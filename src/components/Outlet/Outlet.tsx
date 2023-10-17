@@ -19,22 +19,11 @@ const Outlet = (): ReactNode => {
   const { remove_calculatedValues } = useCalculatorContext();
 
   const add_a_calculator: AddCalculator = () => {
-    if (lengthOfHolder <= 5) {
+    if (lengthOfHolder < 5) {
       setCalculatorBlockHolder([
         ...calculatorBlockHolder,
         { id: crypto.randomUUID() },
       ]);
-    } else {
-      toast.warn("You can't add more than 5 calculator blocks", {
-        position: "top-right",
-        autoClose: 2000,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
     }
   };
   const remove_calculator: RemoveCalculator = (id) => {
@@ -52,6 +41,7 @@ const Outlet = (): ReactNode => {
         return (
           <CalculatorBlock
             key={blockRef.id}
+            lengthOfHolder={lengthOfHolder}
             remove_calculator={remove_calculator}
             id={blockRef.id}
             add_a_calculator={add_a_calculator}

@@ -8,7 +8,7 @@ import { useCalculatorContext } from "../../store/contexts/calculatorContext";
 import AddBtn from "./AddBtn";
 import InputBlock from "./InputBlock";
 import { IDofCalculator, RemoveCalculator } from "./Outlet";
-import { toast } from "react-toastify";
+import TooltipTop, { TooltipID } from "../TooltipTop";
 
 export type Value = number | null;
 export type Measurements = {
@@ -34,40 +34,40 @@ export interface CalculatedData {
   widthMax: number;
 }
 
-const warnToast = (content: string): void => {
-  toast.warn(content, {
-    position: "top-right",
-    autoClose: 2000,
-    hideProgressBar: true,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
-    theme: "light",
-  });
-};
-
 const CalculatorBlock = memo(
   ({
     id,
     isLastOfIndex = true,
     add_a_calculator,
     remove_calculator,
+    lengthOfHolder,
   }: {
     id: IDofCalculator;
     isLastOfIndex: boolean;
     add_a_calculator(): void;
     remove_calculator: RemoveCalculator;
+    lengthOfHolder: number;
   }): React.JSX.Element => {
     const [measurements, setMeasurements] = useState(initialState);
+    const [tooltipDisplayID, setTooltipDisplayID] = useState<TooltipID | null>(
+      null
+    );
     const { set_calculatedValues } = useCalculatorContext();
+
+    const showTooltip = useCallback((id: TooltipID): (() => void) => {
+      setTooltipDisplayID(id);
+      const timeoutId = setTimeout(() => {
+        setTooltipDisplayID(null);
+      }, 2000);
+      return () => clearTimeout(timeoutId);
+    }, []);
 
     const {
       "font-max": fontMax,
       "font-min": fontMin,
       "width-min": widthMin,
       "width-max": widthMax,
-    } = measurements as { [keys: string]: number };
+    } = measurements as { [key: string]: number };
 
     const setValuesToGlobalContext = useCallback(() => {
       if (Object.values(measurements).every((value) => value !== 0)) {
@@ -90,10 +90,10 @@ const CalculatorBlock = memo(
 
     useEffect(() => {
       if (fontMin >= fontMax) {
-        warnToast("Font Max must be greater than Font Min");
+        // warnToast("Font Max must be greater than Font Min");
       }
       if (widthMin >= widthMax) {
-        warnToast("Width Max must be greater than Width Min");
+        // warnToast("Width Max must be greater than Width Min");
       }
       setValuesToGlobalContext();
       // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -166,12 +166,19 @@ const CalculatorBlock = memo(
           />
         </SimilarBlockContainer>
         {/* Maximum */}
-        <AddBtn
-          id={id}
-          add_a_calculator={add_a_calculator}
-          remove_calculator={remove_calculator}
-          isLastOfIndex={isLastOfIndex}
-        />
+        <div className="button--wrapper" style={{ position: "relative" }}>
+          <TooltipTop id={id} displayConditionId={tooltipDisplayID}>
+            Can't add more than 5, Dev! &#128128;
+          </TooltipTop>
+          <AddBtn
+            id={id}
+            lengthOfHolder={lengthOfHolder}
+            showTooltip={showTooltip}
+            add_a_calculator={add_a_calculator}
+            remove_calculator={remove_calculator}
+            isLastOfIndex={isLastOfIndex}
+          />
+        </div>
       </Wrapper>
     );
   }
