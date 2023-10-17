@@ -35,10 +35,13 @@ const InputBlock = memo(
 
 const Block = styled.div`
   width: 100%;
-  
+
   display: flex;
   flex-direction: column;
   gap: 0.75em;
+
+  position: relative;
+
   @media screen and (min-width: 1280px) {
     width: max-content;
   }
