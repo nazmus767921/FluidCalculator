@@ -13,7 +13,7 @@ const AddBtn = ({
   remove_calculator,
 }: {
   id: IDofCalculator;
-  showTooltip: (id: TooltipID) => () => void;
+  showTooltip: (id: TooltipID, condition: boolean) => () => void | undefined;
   lengthOfHolder: number;
   isLastOfIndex: boolean;
   add_a_calculator(): void;
@@ -27,7 +27,7 @@ const AddBtn = ({
         type="button"
         onClick={() => {
           add_a_calculator();
-          lengthOfHolder === 5 && showTooltip(id);
+          showTooltip(id, lengthOfHolder === 5);
         }}
       >
         <IoIosAddCircle style={iconStyle} />

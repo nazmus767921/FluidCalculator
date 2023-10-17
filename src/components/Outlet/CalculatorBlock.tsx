@@ -54,13 +54,18 @@ const CalculatorBlock = memo(
     );
     const { set_calculatedValues } = useCalculatorContext();
 
-    const showTooltip = useCallback((id: TooltipID): (() => void) => {
-      setTooltipDisplayID(id);
-      const timeoutId = setTimeout(() => {
-        setTooltipDisplayID(null);
-      }, 2000);
-      return () => clearTimeout(timeoutId);
-    }, []);
+    const showTooltip = useCallback(
+      (id: TooltipID, condition: boolean) => {
+        if (condition === true) {
+          setTooltipDisplayID(id);
+          const timeoutId = setTimeout(() => {
+            setTooltipDisplayID(null);
+          }, 2000);
+          return () => clearTimeout(timeoutId);
+        }
+      },
+      []
+    );
 
     const {
       "font-max": fontMax,
