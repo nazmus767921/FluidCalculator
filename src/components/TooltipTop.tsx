@@ -35,22 +35,24 @@ const Body = styled.div`
   transform: translateX(-50%);
 
   padding: 0.75em;
-  margin-bottom: 3em;
+  margin-bottom: 1em;
 
   width: max-content;
-  height: 100%;
 
   display: flex;
   justify-content: center;
   align-items: center;
 
-  border-radius: 5px;
-  background-color: #ffffff;
-  color: #000000;
-  @media screen and (min-width: 1280px) {
-    background-color: #000000;
-    color: #c8c8c8;
+  .condition {
+    color: ${(props) => props.theme.input};
   }
+  .symbol {
+    font-size: 1.5em;
+  }
+
+  border-radius: 5px;
+  background-color: #000000;
+  color: #c8c8c8;
 
   font-size: 0.75em;
   font-weight: 900;
@@ -62,11 +64,8 @@ const Body = styled.div`
     width: 1em;
     height: 1em;
 
-    background-color: #ffffff;
     border-radius: 2px;
-    @media screen and (min-width: 1280px) {
-      background-color: #000000;
-    }
+    background-color: #000000;
 
     position: absolute;
     bottom: -0.25em;

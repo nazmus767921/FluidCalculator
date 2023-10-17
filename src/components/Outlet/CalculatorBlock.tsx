@@ -54,18 +54,15 @@ const CalculatorBlock = memo(
     );
     const { set_calculatedValues } = useCalculatorContext();
 
-    const showTooltip = useCallback(
-      (id: TooltipID, condition: boolean) => {
-        if (condition === true) {
-          setTooltipDisplayID(id);
-          const timeoutId = setTimeout(() => {
-            setTooltipDisplayID(null);
-          }, 2000);
-          return () => clearTimeout(timeoutId);
-        }
-      },
-      []
-    );
+    const showTooltip = useCallback((id: TooltipID, condition: boolean) => {
+      if (condition === true) {
+        setTooltipDisplayID(id);
+        const timeoutId = setTimeout(() => {
+          setTooltipDisplayID(null);
+        }, 2000);
+        return () => clearTimeout(timeoutId);
+      }
+    }, []);
 
     const {
       "font-max": fontMax,
@@ -94,12 +91,18 @@ const CalculatorBlock = memo(
     }, [measurements]);
 
     useEffect(() => {
-      if (fontMin >= fontMax) {
-        // warnToast("Font Max must be greater than Font Min");
-      }
-      if (widthMin >= widthMax) {
-        // warnToast("Width Max must be greater than Width Min");
-      }
+      fontMin >= fontMax
+        ? setTooltipDisplayID("font")
+        : setTooltipDisplayID("null");
+    }, [fontMin, fontMax]);
+
+    useEffect(() => {
+      widthMin >= widthMax
+        ? setTooltipDisplayID("width")
+        : setTooltipDisplayID("null");
+    }, [widthMin, widthMax]);
+
+    useEffect(() => {
       setValuesToGlobalContext();
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [measurements]);
@@ -137,6 +140,13 @@ const CalculatorBlock = memo(
       <Wrapper>
         {/* Minimum */}
         <SimilarBlockContainer>
+          <TooltipTop id={"font"} displayConditionId={tooltipDisplayID}>
+            <p>
+              <span className="condition">Max Font-size</span> must be{" "}
+              <span className="symbol">{">"}</span>{" "}
+              <span className="condition">Min Font-size</span>
+            </p>
+          </TooltipTop>
           <InputBlock
             icon={<ImFontSize />}
             measurements={measurements}
@@ -155,6 +165,13 @@ const CalculatorBlock = memo(
         {/* Minimum */}
         {/* Maximum */}
         <SimilarBlockContainer>
+          <TooltipTop id={"width"} displayConditionId={tooltipDisplayID}>
+            <p>
+              <span className="condition">Max width</span> must be{" "}
+              <span className="symbol">{">"}</span>{" "}
+              <span className="condition">Min width</span>
+            </p>
+          </TooltipTop>
           <InputBlock
             icon={getDeviceIcon(measurements["width-min"]!)}
             measurements={measurements}
@@ -171,9 +188,12 @@ const CalculatorBlock = memo(
           />
         </SimilarBlockContainer>
         {/* Maximum */}
-        <div className="button--wrapper" style={{ position: "relative" }}>
+        <div className="position-relative">
           <TooltipTop id={id} displayConditionId={tooltipDisplayID}>
-            Can't add more than 5, Dev! &#128128;
+            <p>
+              Can't add more than <span className="condition symbol">5</span>,{" "}
+              <span className="condition">Dev!</span> &#128128;
+            </p>
           </TooltipTop>
           <AddBtn
             id={id}
@@ -196,6 +216,8 @@ const SimilarBlockContainer = styled.div`
   flex-direction: column;
   justify-content: space-between;
   gap: 1em;
+
+  position: relative;
 
   @media screen and (min-width: 1280px) {
     flex-direction: row;
@@ -221,6 +243,10 @@ const Wrapper = styled.div`
 
   /* design */
   border-block: 1px solid rgba(27, 22, 66, 0.1);
+
+  .position-relative {
+    position: relative;
+  }
 `;
 
 export default CalculatorBlock;
