@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+
 interface ConstantData {
   title: string;
   body?: string;
@@ -101,4 +103,11 @@ export const example: ConstantData = {
 export const conclusion: ConstantData = {
   title: "Conclusion",
   body: "Congratulations! You've learned how to use fluid calculator to create fluid font sizes using CSS clamp. By following these steps, you can ensure that your website's font sizes adapt smoothly to different screen sizes.",
+};
+
+export const credits: { title: string; points: { list: ReactNode } } = {
+  title: "Credits",
+  points: {
+    list: [],
+  },
 };

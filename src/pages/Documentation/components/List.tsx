@@ -40,6 +40,7 @@ const List = ({ children, header, type }: Props) => {
 const Li = styled.li`
   margin-left: 3em;
   font-size: 80%;
+  color: ${props=> props.theme.text};
 `;
 
 const Header = styled.p`
