@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { H1 } from "./components/styledElements";
-import { user_guide } from "./constant";
+import { getting_started, user_guide } from "./constant";
+import List from "./components/List";
 
 const DocumentationPage = () => {
   return (
@@ -8,6 +9,10 @@ const DocumentationPage = () => {
       <Container>
         <H1>{user_guide.title}</H1>
         <p>{user_guide.body}</p>
+        <H1>{getting_started.title}</H1>
+        <List type="ol" header={getting_started.points?.header}>
+          {getting_started.points?.list}
+        </List>
       </Container>
     </PageWrapper>
   );
@@ -16,12 +21,11 @@ const DocumentationPage = () => {
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
 
   margin: 0 auto;
 
-  width: calc(100% - 20em);
-  border: 1px solid;
+  width: 70ch;
 `;
 
 const PageWrapper = styled.div`
