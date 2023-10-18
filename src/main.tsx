@@ -6,6 +6,8 @@ import { ThemeContextProvider } from "./store/ThemeContext.tsx";
 import { GlobalProvider } from "./store/GlobalProvider.tsx";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import HomePage from "./pages/Home/HomePage.tsx";
+import { documentation_route } from "./pages/pages.routes.ts";
+import DocumentationPage from "./pages/Documentation";
 
 const router = createBrowserRouter([
   {
@@ -13,9 +15,10 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       {
-				index: true,
+        index: true,
         element: <HomePage />,
       },
+      { path: documentation_route, element: <DocumentationPage /> },
     ],
   },
 ]);

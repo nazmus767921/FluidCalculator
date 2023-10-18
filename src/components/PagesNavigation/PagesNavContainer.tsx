@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { RouteAddress, documentation_route } from "../../pages/pages.routes";
 import { IoDocumentText } from "react-icons/io5";
 import SocialIcon from "../SocialIcon";
+import { Link } from "react-router-dom";
 
 const PagesNavContainer = () => {
   type NavItem = {
@@ -22,9 +23,9 @@ const PagesNavContainer = () => {
     <Container>
       {pagesNav.map(
         (nav: NavItem): React.ReactNode => (
-          <a href={nav.link} key={crypto.randomUUID()}>
+          <Link to={nav.link} key={crypto.randomUUID()}>
             <SocialIcon tooltip={nav.tooltip}>{nav.icon}</SocialIcon>
-          </a>
+          </Link>
         )
       )}
     </Container>
