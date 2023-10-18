@@ -86,11 +86,12 @@ export const example: ConstantData = {
       `Enter 768 in the "Breakpoint" field and click the "+" button to add it.`,
       `Enter 1024 in the "Breakpoint" field and click the "+" button to add it.`,
       `Click the "Calculate" button.`,
-      `Copy the generated CSS code and paste it into your project's CSS file.`,
+      `You'll get your calculated code as shown below.`,
+      `Copy the generated CSS code and paste it into your project's CSS file or in your main styling file.`,
     ],
   },
   code: `@media only screen and (min-width: 768px and max-width: 1024px) {
-    body {
+    html {
       font-size: 1rem; /* browser support fallback */
       font-size: clamp(0.8rem, -1.5rem + 4.6875vw, 1.5rem);
     }
