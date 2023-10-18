@@ -3,6 +3,7 @@ import { H1 } from "./components/styledElements";
 import {
   apply,
   conclusion,
+  credits,
   example,
   generate_css,
   getting_started,
@@ -42,7 +43,7 @@ const DocumentationPage = () => {
         </List>
         {/* manage calc */}
         <H1>{manage_calc.title}</H1>
-        <List type="ol" header={manage_calc.points?.header}>
+        <List type="ul" header={manage_calc.points?.header}>
           {manage_calc.points?.list}
         </List>
         {/* example */}
@@ -54,6 +55,11 @@ const DocumentationPage = () => {
         {/* conclusion */}
         <H1>{conclusion.title}</H1>
         <p>{conclusion.body}</p>
+        {/* credits */}
+        <H1>{"credits"}</H1>
+        <List type="ol" header={example.points?.header}>
+          {credits.points?.list}
+        </List>
       </Container>
     </PageWrapper>
   );

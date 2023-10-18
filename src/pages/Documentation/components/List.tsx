@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 type Props = {
-  children: string[] | undefined;
+  children: string[] | React.ReactElement[] | undefined;
   header?: string;
   type: "ul" | "ol";
 };
@@ -10,7 +10,7 @@ const List = ({ children, header, type }: Props) => {
   if (type === "ul") {
     return (
       <Ul>
-        {header ? <p className="header">{header}</p> : null}
+        {header ? <Header>{header}</Header> : null}
         {children?.map((item) => {
           return (
             <Li key={crypto.randomUUID()}>
@@ -39,8 +39,8 @@ const List = ({ children, header, type }: Props) => {
 
 const Li = styled.li`
   margin-left: 3em;
-  font-size: 80%;
-  color: ${props=> props.theme.text};
+  font-size: 85%;
+  color: ${(props) => props.theme.text};
 `;
 
 const Header = styled.p`

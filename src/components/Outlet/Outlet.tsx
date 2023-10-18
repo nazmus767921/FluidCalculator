@@ -3,7 +3,6 @@ import styled from "styled-components";
 import Header from "./Header";
 import CalculatorBlock from "./CalculatorBlock";
 import { useCalculatorContext } from "../../store/contexts/calculatorContext";
-import { toast } from "react-toastify";
 
 export type IDofCalculator = string;
 
