@@ -51,6 +51,9 @@ h1 {
 
 p {
   font-family: 'Inter', sans-serif;
+  opacity: 0.7;
+  color: ${(props) => props.theme.text};
+  opacity: 0.8;
 }
 
 input, input:focus {
