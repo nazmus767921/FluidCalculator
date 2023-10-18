@@ -12,10 +12,10 @@ export type AddCalculator = () => void;
 export type RemoveCalculator = (id: IDofCalculator) => void;
 
 const Outlet = (): ReactNode => {
+  const { remove_calculatedValues, calculatedValues } = useCalculatorContext();
   const [calculatorBlockHolder, setCalculatorBlockHolder] =
-    useState<CalculatorBlockHolder>([{ id: "initialCalcID" }]);
+    useState<CalculatorBlockHolder>([...calculatedValues]);
   const lengthOfHolder = calculatorBlockHolder.length;
-  const { remove_calculatedValues } = useCalculatorContext();
 
   const add_a_calculator: AddCalculator = () => {
     if (lengthOfHolder < 5) {

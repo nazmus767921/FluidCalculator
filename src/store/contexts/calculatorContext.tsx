@@ -28,7 +28,17 @@ type ContextValues = State & Actions;
 const calculatorContext = createContext<ContextValues | null>(null);
 
 const initialState: State = {
-  calculatedValues: [],
+  calculatedValues: [
+    {
+      id: "initID",
+      slope: 1,
+      yInterceptor: 1,
+      fontMax: 20,
+      fontMin: 16,
+      widthMin: 360,
+      widthMax: 1920,
+    },
+  ],
 };
 
 export const CalculatorContextProvider: CalculatorContextProviderType = ({
