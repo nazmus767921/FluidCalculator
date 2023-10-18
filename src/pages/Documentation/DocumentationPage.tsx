@@ -3,7 +3,6 @@ import { H1 } from "./components/styledElements";
 import {
   apply,
   conclusion,
-  credits,
   example,
   generate_css,
   getting_started,
