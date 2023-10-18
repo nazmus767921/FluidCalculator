@@ -49,6 +49,10 @@ h1 {
   font-size: 1.953em;
 }
 
+p {
+  font-family: 'Inter', sans-serif;
+}
+
 input, input:focus {
   border: none;
   outline: none;
