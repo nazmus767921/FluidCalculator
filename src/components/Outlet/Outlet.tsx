@@ -13,41 +13,38 @@ export type RemoveCalculator = (id: IDofCalculator) => void;
 
 const Outlet = (): ReactNode => {
   const [calculatorBlockHolder, setCalculatorBlockHolder] =
-    useState<CalculatorBlockHolder>([{ id: crypto.randomUUID() }]);
+    useState<CalculatorBlockHolder>([{ id: "initialCalcID" }]);
   const lengthOfHolder = calculatorBlockHolder.length;
   const { remove_calculatedValues } = useCalculatorContext();
 
   const add_a_calculator: AddCalculator = () => {
     if (lengthOfHolder < 5) {
-      setCalculatorBlockHolder([
-        ...calculatorBlockHolder,
+      setCalculatorBlockHolder((prevHolder) => [
+        ...prevHolder,
         { id: crypto.randomUUID() },
       ]);
     }
   };
   const remove_calculator: RemoveCalculator = (id) => {
-    const newCalculatorBlockHolder = calculatorBlockHolder.filter(
-      (calculatorBlock) => calculatorBlock.id !== id
+    setCalculatorBlockHolder((prevHolder) =>
+      prevHolder.filter((calculatorBlock) => calculatorBlock.id !== id)
     );
     remove_calculatedValues(id);
-    setCalculatorBlockHolder(newCalculatorBlockHolder);
   };
 
   return (
     <Section>
       <Header />
-      {calculatorBlockHolder.map((blockRef, index: number) => {
-        return (
-          <CalculatorBlock
-            key={blockRef.id}
-            lengthOfHolder={lengthOfHolder}
-            remove_calculator={remove_calculator}
-            id={blockRef.id}
-            add_a_calculator={add_a_calculator}
-            isLastOfIndex={index === lengthOfHolder - 1}
-          />
-        );
-      })}
+      {calculatorBlockHolder.map((blockRef, index: number) => (
+        <CalculatorBlock
+          key={blockRef.id}
+          lengthOfHolder={lengthOfHolder}
+          remove_calculator={remove_calculator}
+          id={blockRef.id}
+          add_a_calculator={add_a_calculator}
+          isLastOfIndex={index === lengthOfHolder - 1}
+        />
+      ))}
     </Section>
   );
 };
