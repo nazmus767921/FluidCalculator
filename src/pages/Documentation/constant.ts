@@ -105,19 +105,3 @@ export const conclusion: ConstantData = {
   body: "Congratulations! You've learned how to use fluid calculator to create fluid font sizes using CSS clamp. By following these steps, you can ensure that your website's font sizes adapt smoothly to different screen sizes.",
 };
 
-export const credits: {
-  title: string;
-  points: { list: React.ReactElement[] };
-} = {
-  title: "Credits",
-  points: {
-    list: [
-      <a href="https://www.google.com" target="_blank" rel="noreferrer">
-        Google
-      </a>,
-      <a href="https://www.reactjs.org" target="_blank" rel="noreferrer">
-        React
-      </a>,
-    ],
-  },
-};

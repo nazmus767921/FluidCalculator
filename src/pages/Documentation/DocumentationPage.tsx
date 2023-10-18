@@ -57,9 +57,6 @@ const DocumentationPage = () => {
         <p>{conclusion.body}</p>
         {/* credits */}
         <H1>{"credits"}</H1>
-        <List type="ol" header={example.points?.header}>
-          {credits.points?.list}
-        </List>
       </Container>
     </PageWrapper>
   );
