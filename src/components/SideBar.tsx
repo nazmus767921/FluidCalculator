@@ -3,11 +3,13 @@ import styled from "styled-components";
 import Logo from "./Logo";
 import { border } from "../styles";
 import SocialsContainer from "./SocialsContainer";
+import PagesNavContainer from "./PagesNavigation/PagesNavContainer";
 
 const SideBar = (): React.JSX.Element => {
   return (
     <Wrapper>
       <Logo className="logo-wrapper" />
+      <PagesNavContainer />
       <SocialsContainer />
     </Wrapper>
   );
