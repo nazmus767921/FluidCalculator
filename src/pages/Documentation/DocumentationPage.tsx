@@ -76,6 +76,10 @@ const PageWrapper = styled.div`
 
   min-height: 100vh;
   min-height: 100dvh;
+  p {
+    color: ${(props) => props.theme.text};
+    opacity: 0.8;
+  }
 `;
 
 export default DocumentationPage;
