@@ -24,7 +24,7 @@ const Body = styled.div`
   padding: 0.75em;
   margin-left: 3em;
 
-  width: fit-content;
+  width: max-content;
   height: 100%;
 
   display: none;
