@@ -4,11 +4,16 @@ import Logo from "./Logo";
 import { border } from "../styles";
 import SocialsContainer from "./SocialsContainer";
 import PagesNavContainer from "./PagesNavigation/PagesNavContainer";
+import { Link } from "react-router-dom";
+import { home_route } from "../pages/pages.routes";
+import { ease } from "../utils/animations";
 
 const SideBar = (): React.JSX.Element => {
   return (
     <Wrapper>
-      <Logo className="logo-wrapper" />
+      <Link to={home_route}>
+        <Logo className="logo-wrapper" />
+      </Link>
       <PagesNavContainer />
       <SocialsContainer />
     </Wrapper>
@@ -37,6 +42,14 @@ const Wrapper = styled.div`
   .logo-wrapper {
     border-bottom: ${border["--border-sm-solid"]} rgba(27, 22, 66, 0.1);
     padding: 1em;
+    .logo-element {
+      transition: all 0.5s ${ease["out-expo"]};
+    }
+    &:hover {
+      .logo-element {
+        transform: rotateZ(-5deg) scale(1.2);
+      }
+    }
   }
 `;
 
