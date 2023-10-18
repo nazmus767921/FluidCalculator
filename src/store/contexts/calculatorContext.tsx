@@ -1,4 +1,4 @@
-import { ReactNode, createContext, useContext, useEffect, useReducer } from "react";
+import { ReactNode, createContext, useContext, useReducer } from "react";
 import { calculatorContextReducer as reducer } from "../reducers/calculatorReducer.ts";
 import { CalculatedData } from "../../components/Outlet/CalculatorBlock.tsx";
 
