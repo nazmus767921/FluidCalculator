@@ -5,8 +5,13 @@ import { GlobalStyleProvider } from "./global.styled.js";
 import { GlobalProvider } from "./store/GlobalProvider.tsx";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import HomePage from "./pages/Home/HomePage.tsx";
-import { documentation_route, home_route } from "./pages/pages.routes.ts";
+import {
+  documentation_route,
+  home_route,
+  additional_features,
+} from "./pages/pages.routes.ts";
 import DocumentationPage from "./pages/Documentation";
+import AdditionalFeaturesPage from "./pages/AdditionalFeatures";
 
 const router = createBrowserRouter([
   {
@@ -18,6 +23,7 @@ const router = createBrowserRouter([
         element: <HomePage />,
       },
       { path: documentation_route, element: <DocumentationPage /> },
+      { path: additional_features, element: <AdditionalFeaturesPage /> },
     ],
   },
 ]);

@@ -1,9 +1,14 @@
 import styled from "styled-components";
-import { RouteAddress, documentation_route } from "../../pages/pages.routes";
+import {
+  RouteAddress,
+  documentation_route,
+  additional_features,
+} from "../../pages/pages.routes";
 import { IoDocumentText } from "react-icons/io5";
 import SocialIcon from "../SocialIcon";
 import { NavLink } from "react-router-dom";
 import { ease } from "../../utils/animations";
+import { IoIosMore } from "react-icons/io";
 
 const PagesNavContainer = () => {
   type NavItem = {
@@ -17,6 +22,11 @@ const PagesNavContainer = () => {
       link: documentation_route,
       icon: <IoDocumentText className="icon" />,
       tooltip: "read documentation",
+    },
+    {
+      link: additional_features,
+      icon: <IoIosMore className="icon" />,
+      tooltip: "More features",
     },
   ];
 
@@ -63,7 +73,7 @@ const Container = styled.div`
   }
 
   .NavIcon {
-    --navIcon-padding: 1.25em;
+    --navIcon-padding: 1.5em;
     width: 100%;
     padding: var(--navIcon-padding);
     padding-left: calc(var(--navIcon-padding) + var(--selector-width));
