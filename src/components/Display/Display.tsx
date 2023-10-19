@@ -4,9 +4,12 @@ import { useCalculatorContext } from "../../store/contexts/calculatorContext";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { materialDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { getRem } from "../../helpers/getRem";
+import { useSelector } from "react-redux";
+import { RootStore } from "../../store/store";
 
 const Display = (): React.JSX.Element => {
-  const { calculatedValues } = useCalculatorContext();
+  // const { calculatedValues } = useCalculatorContext();
+  const { calculators } = useSelector((store: RootStore) => store.calculators);
 
   const codeHighlighterStyle: CSSProperties = {
     padding: "2em",
@@ -18,11 +21,18 @@ const Display = (): React.JSX.Element => {
   return (
     <Section>
       <div className="container">
-        {calculatedValues.map((c) => {
-          const { slope, yInterceptor, fontMax, fontMin, widthMin, widthMax } =
-            c;
+        {calculators.map((c) => {
+          const {
+            id,
+            slope,
+            yInterceptor,
+            fontMax,
+            fontMin,
+            widthMin,
+            widthMax,
+          } = c;
           return (
-            <div className="syntax">
+            <div key={id} className="syntax">
               <SyntaxHighlighter
                 language="css"
                 style={materialDark}
@@ -32,9 +42,11 @@ const Display = (): React.JSX.Element => {
                 {`@media screen and (min-width: ${widthMin}px) and (max-width: ${widthMax}px) {
     html {
       font-size: 1rem; /* browser support fallback */
-      font-size: clamp(${getRem(fontMin)}, ${parseFloat((yInterceptor / 16).toFixed(
-                  5
-                ))}rem + ${parseFloat((slope * 100).toFixed(5))}vw, ${fontMax / 16}rem);
+      font-size: clamp(${getRem(fontMin)}, ${parseFloat(
+                  (yInterceptor / 16).toFixed(5)
+                )}rem + ${parseFloat((slope * 100).toFixed(5))}vw, ${
+                  fontMax / 16
+                }rem);
     }
   };`}
               </SyntaxHighlighter>

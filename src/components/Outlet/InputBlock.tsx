@@ -1,30 +1,32 @@
 import { ReactNode, memo } from "react";
 import styled from "styled-components";
-import { Measurements } from "./CalculatorBlock";
 import Input from "./Input";
 import Label from "./Label";
 
 type Props = {
+  id: string;
   icon?: ReactNode;
-  name: "font-min" | "font-max" | "width-min" | "width-max";
+  name: "fontMin" | "fontMax" | "widthMin" | "widthMax";
   label: string;
-  measurements: Measurements;
+  // measurements: Measurements;
+  value: number | "";
   update_input(e: React.ChangeEvent<HTMLInputElement>): void;
 };
 
 const InputBlock = memo(
-  ({ measurements, update_input, name, label, icon }: Props) => {
+  ({ id, value, update_input, name, label, icon }: Props) => {
     return (
       <Block>
-        <Label htmlFor={name} icon={icon}>
+        <Label htmlFor={id + name} icon={icon}>
           {label}
         </Label>
         <Input
+          id={id + name}
           name={name}
           type={"number"}
           min={0}
           max={9999}
-          value={measurements[name] !== 0 ? measurements[name] : null}
+          value={value !== 0 ? value : ""}
           onChange={update_input}
           width="7.8em"
         />

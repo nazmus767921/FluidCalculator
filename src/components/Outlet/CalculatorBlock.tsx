@@ -4,25 +4,15 @@ import { ImFontSize } from "react-icons/im";
 import { IoTabletLandscape, IoTabletPortrait } from "react-icons/io5";
 import { PiMonitorFill } from "react-icons/pi";
 import { styled } from "styled-components";
-import { useCalculatorContext } from "../../store/contexts/calculatorContext";
 import AddBtn from "./AddBtn";
 import InputBlock from "./InputBlock";
-import { IDofCalculator, RemoveCalculator } from "./Outlet";
+import { RemoveCalculator } from "./Outlet";
 import TooltipTop, { TooltipID } from "../TooltipTop";
-
-export type Value = number | null;
-export type Measurements = {
-  "font-min": Value;
-  "font-max": Value;
-  "width-min": Value;
-  "width-max": Value;
-};
-const initialState: Measurements = {
-  "font-min": 16,
-  "font-max": 20,
-  "width-min": 360,
-  "width-max": 1920,
-};
+import { useDispatch } from "react-redux";
+import {
+  calculate_data,
+  update_calculator_values,
+} from "../../features/calculatorBlock/calculatorSlice";
 
 export interface CalculatedData {
   id: string;
@@ -42,18 +32,50 @@ const CalculatorBlock = memo(
     remove_calculator,
     lengthOfHolder,
   }: {
-    id: IDofCalculator;
+    id: string;
     isLastOfIndex: boolean;
     add_a_calculator(): void;
     remove_calculator: RemoveCalculator;
     lengthOfHolder: number;
   }): React.JSX.Element => {
-    const [measurements, setMeasurements] = useState(initialState);
+    const [fontMin, setFontMin] = useState(16);
+    const [fontMax, setFontMax] = useState(20);
+    const [widthMin, setWidthMin] = useState(360);
+    const [widthMax, setWidthMax] = useState(1920);
+
+    const dispatch = useDispatch();
+
+    const inputHandler = useCallback(
+      (e: React.ChangeEvent<HTMLInputElement>): void => {
+        const { name, value } = e.currentTarget;
+        const NValue: number = Number(value);
+        if (NValue !== null) {
+          name === "fontMin"
+            ? setFontMin(NValue)
+            : name === "fontMax"
+            ? setFontMax(NValue)
+            : name === "widthMin"
+            ? setWidthMin(NValue)
+            : name === "widthMax"
+            ? setWidthMax(NValue)
+            : null;
+
+          dispatch(update_calculator_values({ id, name, value }));
+        }
+      },
+      [dispatch, id]
+    );
+
+    useEffect(() => {
+      const slope: number = (fontMax - fontMin) / (widthMax - widthMin);
+      const yInterceptor = fontMin - slope * widthMin;
+      dispatch(calculate_data({ id, slope, yInterceptor }));
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [fontMin, fontMax, widthMin, widthMax]);
+
     const [tooltipDisplayID, setTooltipDisplayID] = useState<TooltipID | null>(
       null
     );
-    const { set_calculatedValues } = useCalculatorContext();
-
     const showTooltip = useCallback((id: TooltipID, condition: boolean) => {
       if (condition === true) {
         setTooltipDisplayID(id);
@@ -64,31 +86,24 @@ const CalculatorBlock = memo(
       }
     }, []);
 
-    const {
-      "font-max": fontMax,
-      "font-min": fontMin,
-      "width-min": widthMin,
-      "width-max": widthMax,
-    } = measurements as { [key: string]: number };
-
-    const setValuesToGlobalContext = useCallback(() => {
-      if (Object.values(measurements).every((value) => value !== 0)) {
-        if (!(fontMin >= fontMax) && !(widthMin >= widthMax)) {
-          const slope: number = (fontMax - fontMin) / (widthMax - widthMin);
-          const yInterceptor = fontMin - slope * widthMin;
-          set_calculatedValues({
-            id,
-            slope,
-            yInterceptor,
-            fontMax,
-            fontMin,
-            widthMin,
-            widthMax,
-          });
-        }
-      }
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [measurements]);
+    // const setValuesToGlobalContext = useCallback(() => {
+    //   if (Object.values(measurements).every((value) => value !== 0)) {
+    //     if (!(fontMin >= fontMax) && !(widthMin >= widthMax)) {
+    //       const slope: number = (fontMax - fontMin) / (widthMax - widthMin);
+    //       const yInterceptor = fontMin - slope * widthMin;
+    //       set_calculatedValues({
+    //         id,
+    //         slope,
+    //         yInterceptor,
+    //         fontMax,
+    //         fontMin,
+    //         widthMin,
+    //         widthMax,
+    //       });
+    //     }
+    //   }
+    //   // eslint-disable-next-line react-hooks/exhaustive-deps
+    // }, [measurements]);
 
     useEffect(() => {
       fontMin >= fontMax
@@ -102,19 +117,19 @@ const CalculatorBlock = memo(
         : setTooltipDisplayID("null");
     }, [widthMin, widthMax]);
 
-    useEffect(() => {
-      setValuesToGlobalContext();
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [measurements]);
+    // useEffect(() => {
+    //   setValuesToGlobalContext();
+    //   // eslint-disable-next-line react-hooks/exhaustive-deps
+    // }, [measurements]);
 
     // input actions
-    const update_input = (e: React.ChangeEvent<HTMLInputElement>) => {
-      const { name, value } = e.currentTarget;
-      if (Number(value) !== null) {
-        const newState = { ...measurements, [name]: Number(value) };
-        setMeasurements(newState);
-      }
-    };
+    // const update_input = (e: React.ChangeEvent<HTMLInputElement>) => {
+    //   const { name, value } = e.currentTarget;
+    //   if (Number(value) !== null) {
+    //     const newState = { ...measurements, [name]: Number(value) };
+    //     setMeasurements(newState);
+    //   }
+    // };
 
     // get icons based on input value
     const getDeviceIcon = (value: number): ReactNode => {
@@ -148,17 +163,21 @@ const CalculatorBlock = memo(
             </p>
           </TooltipTop>
           <InputBlock
+            id={id}
             icon={<ImFontSize />}
-            measurements={measurements}
-            update_input={update_input}
-            name="font-min"
+            value={fontMin}
+            // measurements={measurements}
+            update_input={(e) => inputHandler(e)}
+            name="fontMin"
             label="Min Font-size"
           />
           <InputBlock
+            id={id}
             icon={<ImFontSize />}
-            measurements={measurements}
-            update_input={update_input}
-            name="font-max"
+            value={fontMax}
+            // measurements={measurements}
+            update_input={(e) => inputHandler(e)}
+            name="fontMax"
             label="Max Font-size"
           />
         </SimilarBlockContainer>
@@ -173,17 +192,21 @@ const CalculatorBlock = memo(
             </p>
           </TooltipTop>
           <InputBlock
-            icon={getDeviceIcon(measurements["width-min"]!)}
-            measurements={measurements}
-            update_input={update_input}
-            name="width-min"
+            id={id}
+            icon={getDeviceIcon(widthMin)}
+            value={widthMin}
+            // measurements={measurements}
+            update_input={(e) => inputHandler(e)}
+            name="widthMin"
             label="Min Width"
           />
           <InputBlock
-            icon={getDeviceIcon(measurements["width-max"]!)}
-            measurements={measurements}
-            update_input={update_input}
-            name="width-max"
+            id={id}
+            icon={getDeviceIcon(widthMax)}
+            value={widthMax}
+            // measurements={measurements}
+            update_input={(e) => inputHandler(e)}
+            name="widthMax"
             label="Max Width"
           />
         </SimilarBlockContainer>
@@ -209,6 +232,7 @@ const CalculatorBlock = memo(
   }
 );
 
+// styled components
 const SimilarBlockContainer = styled.div`
   width: min(100%, 25em);
 
@@ -224,7 +248,6 @@ const SimilarBlockContainer = styled.div`
     width: max-content;
   }
 `;
-
 const Wrapper = styled.div`
   width: 100%;
 

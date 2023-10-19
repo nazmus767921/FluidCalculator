@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { Value } from "./CalculatorBlock";
 
 type Props = {
   name: string;
@@ -7,7 +6,7 @@ type Props = {
   id?: string;
   min?: number;
   max?: number;
-  value: Value;
+  value: number | "";
   onChange(e: React.ChangeEvent<HTMLInputElement>): void;
   width?: string;
   height?: string;
