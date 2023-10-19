@@ -8,11 +8,12 @@ import AddBtn from "./AddBtn";
 import InputBlock from "./InputBlock";
 import { RemoveCalculator } from "./Outlet";
 import TooltipTop, { TooltipID } from "../TooltipTop";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   calculate_data,
   update_calculator_values,
 } from "../../features/calculatorBlock/calculatorSlice";
+import { RootStore } from "../../store/store";
 
 export interface CalculatedData {
   id: string;
@@ -38,10 +39,24 @@ const CalculatorBlock = memo(
     remove_calculator: RemoveCalculator;
     lengthOfHolder: number;
   }): React.JSX.Element => {
-    const [fontMin, setFontMin] = useState(16);
-    const [fontMax, setFontMax] = useState(20);
-    const [widthMin, setWidthMin] = useState(360);
-    const [widthMax, setWidthMax] = useState(1920);
+    const {
+      fontMin: iFmin,
+      fontMax: iFmax,
+      widthMin: iWmin,
+      widthMax: IWmax,
+    } = useSelector((store: RootStore) =>
+      store.calculators.calculators.find((calc) => calc.id === id)
+    ) ?? {
+      fontMin: 16,
+      fontMax: 20,
+      widthMin: 360,
+      widthMax: 1920,
+    };
+
+    const [fontMin, setFontMin] = useState(iFmin);
+    const [fontMax, setFontMax] = useState(iFmax);
+    const [widthMin, setWidthMin] = useState(iWmin);
+    const [widthMax, setWidthMax] = useState(IWmax);
 
     const dispatch = useDispatch();
 
