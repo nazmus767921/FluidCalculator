@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { H1 } from "./components/styledElements";
+import { Block, H1, H3 } from "./components/styledElements";
 import {
   apply,
   conclusion,
@@ -18,10 +18,10 @@ const DocumentationPage = () => {
     <PageWrapper>
       <Container>
         {/* user guide */}
-        <H1>{user_guide.title}</H1>
+        <H1>{user_guide.title}&#128196;</H1>
         <p>{user_guide.body}</p>
         {/* getting started */}
-        <H1>{getting_started.title}</H1>
+        <H1>{getting_started.title}&#9996;</H1>
         <List type="ol" header={getting_started.points?.header}>
           {getting_started.points?.list}
         </List>
@@ -54,12 +54,63 @@ const DocumentationPage = () => {
         {/* conclusion */}
         <H1>{conclusion.title}</H1>
         <p>{conclusion.body}</p>
+        {/* study Fluid typo */}
+        <H1>Learn More about Fluid Typography</H1>
+        <p>
+          If you want to learn more about fluid typography, I recommend reading
+          the article{" "}
+          <a href="https://blog.logrocket.com/fluid-vs-responsive-typography-css-clamp/">
+            Fluid vs Responsive Typography: CSS Clamp.
+          </a>{" "}
+          It provides additional insights into the benefits and implementation
+          of fluid typography.
+        </p>
         {/* credits */}
         <H1>{"credits"}</H1>
+        <ul>
+          <Li>
+            <p>
+              This calculator was made using the theory of{" "}
+              <span>
+                <a href="https://www.aleksandrhovhannisyan.com/blog/fluid-type-scale-with-css-clamp/">
+                  Aleksandr Hovhannisyan's blog post on fluid type scale with
+                  CSS clamp.
+                </a>
+              </span>{" "}
+            </p>
+          </Li>
+          <Li>
+            <p>
+              The website design is inspired by{" "}
+              <span>
+                <a href="https://wizardry-technique.webflow.io/">
+                  Wizardry Technique developed by Timothy Ricks.
+                </a>
+              </span>{" "}
+            </p>
+          </Li>
+        </ul>
+        {/* Dev Info */}
+        <H3>Developer Info:</H3>
+        <p>
+          This project was developed by <Block>Nazmus Sakib</Block>{" "}
+          {"( Co-founder "}
+          <a href="https://t.me/founded_404">404_founded</a>
+          {")"}. If you have any technical questions or need to report a bug,
+          please reach out to me at{" "}
+          <a href="mailto:nazmus767921@gmail.com">nazmus767921@gmail.com</a>.
+          Thank you for using the website!
+        </p>
       </Container>
     </PageWrapper>
   );
 };
+
+const Li = styled.li`
+  margin-left: 3em;
+  font-size: 85%;
+  color: ${(props) => props.theme.text};
+`;
 
 const Container = styled.div`
   display: flex;
@@ -79,6 +130,13 @@ const PageWrapper = styled.div`
   p {
     color: ${(props) => props.theme.text};
     opacity: 0.8;
+  }
+  a {
+    color: ${(props) => props.theme.input};
+  }
+
+  ${H3} {
+    margin-top: 5em;
   }
 `;
 
