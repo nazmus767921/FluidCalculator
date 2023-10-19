@@ -35,7 +35,9 @@ const SocialsContainer = (): React.ReactNode => {
       {icons.map(
         (iconData: IconData): React.ReactNode => (
           <a href={iconData.link} key={crypto.randomUUID()}>
-            <SocialIcon tooltip={iconData.tooltip}>{iconData.icon}</SocialIcon>
+            <SocialIcon className="socialIcon" tooltip={iconData.tooltip}>
+              {iconData.icon}
+            </SocialIcon>
           </a>
         )
       )}
@@ -48,6 +50,10 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: space-between;
   gap: 1.125em;
+
+  .socialIcon {
+    width: 1.5em;
+  }
 `;
 
 export default SocialsContainer;

@@ -2,7 +2,8 @@ import styled from "styled-components";
 import { RouteAddress, documentation_route } from "../../pages/pages.routes";
 import { IoDocumentText } from "react-icons/io5";
 import SocialIcon from "../SocialIcon";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import { ease } from "../../utils/animations";
 
 const PagesNavContainer = () => {
   type NavItem = {
@@ -23,22 +24,64 @@ const PagesNavContainer = () => {
     <Container>
       {pagesNav.map(
         (nav: NavItem): React.ReactNode => (
-          <Link to={nav.link} key={crypto.randomUUID()}>
-            <SocialIcon tooltip={nav.tooltip}>{nav.icon}</SocialIcon>
-          </Link>
+          <NavLink to={nav.link} key={crypto.randomUUID()} className="navLink">
+            <SocialIcon tooltip={nav.tooltip} className="NavIcon">
+              {nav.icon}
+            </SocialIcon>
+            <Selector />
+          </NavLink>
         )
       )}
     </Container>
   );
 };
 
+const Selector = styled.div`
+  width: var(--selector-width);
+  background-color: ${(props) => props.theme.input};
+  border-radius: 50em;
+  height: 3em;
+  transition: all 0.5s ${ease["out-expo"]};
+  transform: translateX(1em);
+  opacity: 0;
+`;
+
 const Container = styled.div`
+  --selector-width: 0.15em;
   display: flex;
   flex-direction: column;
   align-items: stretch;
 
+  width: 100%;
   height: 100%;
   padding-block: 1.25em;
+
+  .navLink {
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  .NavIcon {
+    --navIcon-padding: 1.25em;
+    width: 100%;
+    padding: var(--navIcon-padding);
+    padding-left: calc(var(--navIcon-padding) + var(--selector-width));
+  }
+
+  svg {
+    transition: all 0.5s ${ease["out-expo"]};
+  }
+
+  .active {
+    svg {
+      color: ${(props) => props.theme.input};
+    }
+    ${Selector} {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
 `;
 
 export default PagesNavContainer;

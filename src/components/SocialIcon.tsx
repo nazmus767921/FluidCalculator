@@ -6,11 +6,16 @@ import Tooltip from "./TooltipLeft";
 type Props = {
   children: React.ReactNode;
   tooltip: string;
+  className?: string;
 };
 
-const SocialIcon = ({ children, tooltip }: Props): React.ReactNode => {
+const SocialIcon = ({
+  children,
+  tooltip,
+  className,
+}: Props): React.ReactNode => {
   return (
-    <Icon>
+    <Icon className={className}>
       <Tooltip className="tooltip">{tooltip}</Tooltip>
       {children}
     </Icon>
@@ -18,7 +23,6 @@ const SocialIcon = ({ children, tooltip }: Props): React.ReactNode => {
 };
 
 const Icon = styled.button`
-  width: 1.5em;
   aspect-ratio: 1/1;
   display: flex;
   justify-content: center;
