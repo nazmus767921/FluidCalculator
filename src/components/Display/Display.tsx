@@ -1,6 +1,5 @@
 import React from "react";
 import styled, { CSSProperties } from "styled-components";
-import { useCalculatorContext } from "../../store/contexts/calculatorContext";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { materialDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { getRem } from "../../helpers/getRem";

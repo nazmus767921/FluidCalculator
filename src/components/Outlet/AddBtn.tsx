@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { IoIosRemoveCircle, IoIosAddCircle } from "react-icons/io";
 import { ease } from "../../utils/animations";
-import { IDofCalculator, RemoveCalculator } from "./Outlet";
+import { RemoveCalculator } from "./Outlet";
 import { TooltipID } from "../TooltipTop";
 
 const AddBtn = ({
@@ -12,7 +12,7 @@ const AddBtn = ({
   add_a_calculator,
   remove_calculator,
 }: {
-  id: IDofCalculator;
+  id: string;
   showTooltip: (id: TooltipID, condition: boolean) => (() => void) | undefined;
   lengthOfHolder: number;
   isLastOfIndex: boolean;
