@@ -12,6 +12,12 @@ import {
 } from "./pages/pages.routes.ts";
 import DocumentationPage from "./pages/Documentation";
 import AdditionalFeaturesPage from "./pages/AdditionalFeatures";
+import { firebaseConfig } from "../firebase.config.ts";
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
 
 const router = createBrowserRouter([
   {
