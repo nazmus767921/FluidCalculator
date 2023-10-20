@@ -1,11 +1,11 @@
 import Display from "../../components/Display/Display";
-import Outlet from "../../components/Outlet/Outlet";
+import CalculatorOutlet from "../../components/Outlet/CalculatorOutlet";
 import { Layout } from "./HomePage.styled";
 
 const HomePage = () => {
   return (
     <Layout>
-      <Outlet />
+      <CalculatorOutlet />
       <Display />
     </Layout>
   );

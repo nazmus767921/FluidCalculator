@@ -6,7 +6,7 @@ import { PiMonitorFill } from "react-icons/pi";
 import { styled } from "styled-components";
 import AddBtn from "./AddBtn";
 import InputBlock from "./InputBlock";
-import { RemoveCalculator } from "./Outlet";
+import { RemoveCalculator } from "./CalculatorOutlet";
 import TooltipTop, { TooltipID } from "../TooltipTop";
 import { useDispatch, useSelector } from "react-redux";
 import {

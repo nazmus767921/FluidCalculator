@@ -13,7 +13,7 @@ import { RootStore } from "../../store/store";
 export type AddCalculator = () => void;
 export type RemoveCalculator = (id: string) => void;
 
-const Outlet = (): ReactNode => {
+const CalculatorOutlet = (): ReactNode => {
   const dispatch = useDispatch();
   const { calculators } = useSelector((store: RootStore) => store.calculators);
   const lengthOfHolder = calculators.length;
@@ -49,14 +49,23 @@ const Section = styled.div`
 
   width: 100%;
   height: 100%;
-  @media screen and (min-width: 1280px) {
-    min-height: 100vh;
-  }
+
+  background-color: ${(props) => props.theme.bg};
+  border-bottom-left-radius: 2em;
+  border-bottom-right-radius: 2em;
 
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
+
+  @media screen and (min-width: 1280px) {
+    min-height: 100vh;
+
+    border-bottom-left-radius: 0;
+    border-top-right-radius: 2em;
+    border-bottom-right-radius: 2em;
+  }
 `;
 
-export default Outlet;
+export default CalculatorOutlet;
