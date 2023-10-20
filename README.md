@@ -2,7 +2,7 @@
 
 Welcome to Fluid Calculator! This guide will help you understand how to use this project to create fluid font sizes using CSS clamp. With this feature, your website's font sizes can automatically adjust to different screen sizes, providing a better user experience.
 
-## [Live Website Link](https://fluidtypo.netlify.app/)
+## [Live Website Link Click Here](https://fluidtypo.netlify.app/)
 
 ## Getting Started
 
