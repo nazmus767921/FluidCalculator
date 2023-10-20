@@ -18,7 +18,7 @@ export const getting_started: ConstantData = {
   points: {
     header: "To start using this website, follow these simple steps:",
     list: [
-      "Open fluid calculator website website in your web browser.",
+      "Open fluid calculator website Homepage in your web browser.",
       "You'll see an interface with input fields and buttons to configure font sizes and breakpoints.",
     ],
   },
@@ -56,8 +56,9 @@ export const apply: ConstantData = {
       "To apply the fluid font sizes to your website, follow these steps:",
     list: [
       "Copy the generated CSS code.",
-      "Paste the code into your project's CSS file.",
+      "Paste the code into your project's CSS file's root element. Typically the 'html' or 'body' tag.",
       "Save the CSS file and refresh your website.",
+      "After applying the CSS, use responsive units, 'em' or 'rem' for specifying measurements, such as font-size, paddings, margins, width, height, and more.",
     ],
   },
 };
@@ -75,7 +76,7 @@ export const manage_calc: ConstantData = {
 };
 
 export const example: ConstantData = {
-  title: "Example",
+  title: "Code Example",
   points: {
     header:
       "Let's go through an example to demonstrate how to use this website:",
