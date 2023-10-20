@@ -18,14 +18,15 @@ const Tooltip = ({
 
 const Body = styled.div`
   position: absolute;
-  top: 0;
+  top: 50%;
   left: 100%;
+  transform: translateY(-50%);
 
-  padding: 0.75em;
+  padding: 0.25em 0.75em;
   margin-left: 3em;
 
   width: max-content;
-  height: 100%;
+  height: fit-content;
 
   display: none;
   justify-content: center;

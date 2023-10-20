@@ -69,7 +69,7 @@ const Container = styled.div`
   .navLink {
     display: flex;
     align-items: center;
-    overflow: hidden;
+    /* overflow: hidden; */
   }
 
   .NavIcon {
