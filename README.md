@@ -2,11 +2,13 @@
 
 Welcome to Fluid Calculator! This guide will help you understand how to use this project to create fluid font sizes using CSS clamp. With this feature, your website's font sizes can automatically adjust to different screen sizes, providing a better user experience.
 
+## [Live Website Link](https://fluidtypo.netlify.app/)
+
 ## Getting Started
 
 To start using this website, follow these simple steps:
 
-1. Open fluid calculator website website in your web browser.
+1. Open fluid calculator website Homepage in your web browser by clicking [Here](https://fluidtypo.netlify.app/)
 2. You'll see an interface with input fields and buttons to configure font sizes and breakpoints.
 
 ## Setting up Fluid Font Sizes
@@ -29,12 +31,13 @@ Once you've set up the font sizes and breakpoints, you can generate the CSS code
 To apply the fluid font sizes to your website, follow these steps:
 
 1. Copy the generated CSS code.
-2. Paste the code into your project's CSS file.
+2. Paste the code into your project's CSS file's root element. Typically the 'html' or 'body' tag.
 3. Save the CSS file and refresh your website.
+4. After applying the CSS, use responsive units, 'em' or 'rem' for specifying measurements, such as font size, paddings, margins, width, height, and more.
 
 ## Managing Calculator Instances
 
-You can add multiple (upto 5, you won't need more than that i guess) calculator instances to calculate without leaving the site or reloading it. Each instance can have its own set of font sizes and breakpoints. Here's how to manage calculator instances:
+You can add multiple (up to 5, you won't need more than that I guess) calculator instances to calculate without leaving the site or reloading it. Each instance can have its own set of font sizes and breakpoints. Here's how to manage calculator instances:
 
 - To add a new calculator instance, click the "+" button beside each calculator instance.
 - To remove a calculator instance, click the "-" button beside the specific calculator instance you want to remove.
@@ -46,8 +49,8 @@ Let's go through an example to demonstrate how to use this website:
 1. Suppose you want a minimum font size of 12 pixels and a maximum font size of 24 pixels.
 2. You also want the font sizes to change at two breakpoints: 768 pixels and 1024 pixels.
 3. Enter 12 in the "Minimum Font Size" field and 24 in the "Maximum Font Size" field.
-4. Enter 768 in the "Breakpoint" field and click the "+" button to add it.
-5. Enter 1024 in the "Breakpoint" field and click the "+" button to add it.
+4. Enter 768 in the "Breakpoint" field.
+5. Enter 1024 in the "Breakpoint" field.
 6. Click the "Calculate" button.
 
 ```css
